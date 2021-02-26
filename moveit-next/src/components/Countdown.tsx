@@ -1,16 +1,26 @@
 
 import { useState, useEffect } from 'react';
+
+
+import { useContext } from 'react';
 import styles from '../styles/components/Countdown.module.css';
+
+import { ChallengesContext } from '../contexts/ChallengesContext';
+
+
 
 let countdownTimeout: NodeJS.Timeout;
 
 export function Countdown() {
+  
+  const { startNewChallenge }  = useContext(ChallengesContext);
+  
   const startTime = 3;//25 * 60;
   const [time, setTime] = useState(startTime);
   const [isActive, setActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
-
-
+  
+  
   const minutes = Math.floor(time / 60);
   const seconds = time % 60; 
   
@@ -33,8 +43,9 @@ export function Countdown() {
         setTime(time - 1);
       },1000)
     }else if (isActive && time === 0){
-      setHasFinished(true)
-      setActive(false)
+      setHasFinished(true);
+      setActive(false);
+      startNewChallenge();
     }
   },[isActive, time]);
 
@@ -65,12 +76,12 @@ export function Countdown() {
           {isActive?
             <button onClick={resetCountdown} className={`${styles.countdownButton} ${styles.countdownButtonActive}`}>
               Abandonar Ciclo
-                <img src='icons/x.svg' />
+                {/* <img src='icons/x.svg' /> */}
             </button>
             :
             <button onClick={startCountdown} className={styles.countdownButton}>
               Iníciar um Ciclo
-              <img src='icons/play-fill.svg' />
+              {/* <img src='icons/play-fill.svg' /> */}
             </button>
           }
         </>

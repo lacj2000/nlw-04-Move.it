@@ -7,6 +7,7 @@ import { CompleteChallenges } from '../components/CompleteChallenges';
 import { Countdown } from '../components/Countdown';
 
 import styles from '../styles/pages/Home.module.css';
+import { ChallengeBox } from '../components/ChallengeBox';
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
         </div>
         {/** rigth */}
         <div>
-
+          <ChallengeBox/>
         </div>
       </section>
     </div>
